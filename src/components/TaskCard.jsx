@@ -41,6 +41,7 @@ export const TaskCard = ({ tarea }) => {
   };
   const handleSave = async (id) => {
     updateTask(id, task);
+    // updateLists();
     closeModal();
   };
 
@@ -50,7 +51,6 @@ export const TaskCard = ({ tarea }) => {
         <TableContainer component={Paper}>
           <Table aria-label="simple-table">
             <TableBody>
-              {/* {tarea.map((tarea) => ( */}
               <TableRow key={tarea.id}>
                 <TableCell>{tarea.tarea}</TableCell>
                 <TableCell>
@@ -69,13 +69,12 @@ export const TaskCard = ({ tarea }) => {
                     onRequestClose={closeModal}
                     contentLabel="Update Task"
                     ariaHideApp={false}
-                    // appElement={}
                   >
                     <h4>Actualizar Tarea</h4>
                     <hr />
                     <TextField
                       type="text"
-                      // value={tarea.undefined}
+                      value={tarea.tarea.value}
                       name="tarea"
                       onChange={handleChange}
                     />
@@ -86,7 +85,6 @@ export const TaskCard = ({ tarea }) => {
                   </Modal>
                 </TableCell>
               </TableRow>
-              {/* ))} */}
             </TableBody>
           </Table>
         </TableContainer>

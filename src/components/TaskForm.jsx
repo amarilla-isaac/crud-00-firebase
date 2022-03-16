@@ -8,25 +8,29 @@ const initialState = {
   tarea: "",
   done: false,
 };
-const TaskForm = () => {
-  const [task, setTask] = useState(initialState);
+const TaskForm = ({ tarea }) => {
+  const [newTask, setNewTask] = useState(initialState);
+  useEffect(() => {
+    setNewTask({ ...tarea, done: false });
+  }, [tarea]);
   const params = useParams();
 
-  const handleChange = ({ target: { tarea, value } }) => {
-    console.log(tarea);
-    setTask({ ...task, [tarea]: value });
+  const handleChange = ({ target: { name, value } }) => {
+    setNewTask({ ...newTask, [name]: value });
   };
   const handleSubmit = async () => {
     if (!params.id) {
-      await saveTask(task);
+      await saveTask(newTask);
     }
-    setTask(initialState);
+    // updateLists();
+    setNewTask(initialState);
+    // window.location.reload(false);
   };
 
   const getTaskById = async (id) => {
     try {
       const doc = await getTask(id);
-      setTask({ ...doc.data() });
+      setNewTask({ ...doc.data() });
     } catch (error) {
       console.error("no get Task by Id components/TaskForm.jsx-ln:26", error);
     }
@@ -38,26 +42,26 @@ const TaskForm = () => {
   }, [params.id]);
   return (
     <>
+      <br />
+      <br />
       <Container>
         <Grid container>
           <FormControl>
             <Grid item>
               <Input
-                id="input-tarea"
-                type="text"
-                placeholder="add Task"
-                // value={task}
-                name="task"
+                placeholder="Add task"
+                // value={newTask}
+                name="tarea"
                 onChange={handleChange}
               />
-
               <Button variant="standart" onClick={handleSubmit}>
-                Agregar
+                Add
               </Button>
             </Grid>
           </FormControl>
         </Grid>
       </Container>
+      <br />
       <TaskList />
     </>
   );
