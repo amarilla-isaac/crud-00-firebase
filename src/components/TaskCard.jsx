@@ -16,9 +16,7 @@ import {
 
 export const TaskCard = ({ tarea }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  // console.log(tarea);
   const [task, setTask] = useState({ tarea: "", done: false });
-  // const navigate = useNavigate();
 
   useEffect(() => {
     setTask({ ...tarea, done: false });
@@ -41,7 +39,6 @@ export const TaskCard = ({ tarea }) => {
   };
   const handleSave = async (id) => {
     updateTask(id, task);
-    // updateLists();
     closeModal();
   };
 

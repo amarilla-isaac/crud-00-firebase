@@ -19,9 +19,14 @@ const TaskList = () => {
   }, []);
 
   useEffect(() => {
-    const test = updateLists();
-
-    return () => test();
+    updateLists((snap) => {
+      const items = [];
+      snap.forEach((snap_data) => {
+        items.push({ ...snap_data.data(), id: snap_data.id });
+      });
+      console.log(items);
+      setTasks(items);
+    });
   }, []);
 
   return (

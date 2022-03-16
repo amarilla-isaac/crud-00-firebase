@@ -22,11 +22,7 @@ export const getTasks = () => getDocs(collection(db, collectionName));
 export const deleteTasks = (id) => deleteDoc(doc(db, collectionName, id));
 export const getTask = (id) => getDoc(doc(db, collectionName, id));
 
-export const updateLists = async () => {
+export const updateLists = async (cb) => {
   const q = query(collection(db, collectionName));
-  return onSnapshot(q, (snap) => {
-    snap.forEach((op) => {
-      console.log(op.data().tarea);
-    });
-  });
+  return await onSnapshot(q, cb);
 };
