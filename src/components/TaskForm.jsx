@@ -18,13 +18,15 @@ const TaskForm = ({ tarea }) => {
   const handleChange = ({ target: { name, value } }) => {
     setNewTask({ ...newTask, [name]: value });
   };
-  const handleSubmit = async () => {
-    if (!params.id) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!newTask.tarea) {
+      alert("Tarea Invalida");
+    } else {
       await saveTask(newTask);
     }
-    // updateLists();
     setNewTask(initialState);
-    // window.location.reload(false);
   };
 
   const getTaskById = async (id) => {

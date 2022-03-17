@@ -71,7 +71,7 @@ export const TaskCard = ({ tarea }) => {
                     <hr />
                     <TextField
                       type="text"
-                      value={tarea.tarea.value}
+                      value={tarea.tarea}
                       name="tarea"
                       onChange={handleChange}
                     />
