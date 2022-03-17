@@ -11,6 +11,7 @@ import {
   TableBody,
   TextField,
   Paper,
+  Checkbox,
 } from "@mui/material";
 // import { useNavigate } from "react-router-dom";
 
@@ -38,10 +39,23 @@ export const TaskCard = ({ tarea }) => {
     setTask({ ...task, [name]: value });
   };
   const handleSave = async (id) => {
+    console.log(id);
     updateTask(id, task);
     closeModal();
   };
+  const handleChangeDone = async ({ target: { value } }) => {
+    // console.log(task.id, value);
+    setTask({ ...task, done: value });
+    console.log(task);
 
+    // setTask({ ...task, [done]: true });
+    // updateTask(id, { done: true });
+    // if (tarea.done === true) {
+    //   console.log("true", tarea);
+    // } else if (tarea.done === false) {
+    //   console.log("false", tarea);
+    // }
+  };
   return (
     <>
       <Container>
@@ -49,6 +63,9 @@ export const TaskCard = ({ tarea }) => {
           <Table aria-label="simple-table">
             <TableBody>
               <TableRow key={tarea.id}>
+                <TableCell>
+                  <Checkbox value={tarea.done} onChange={handleChangeDone} />
+                </TableCell>
                 <TableCell>{tarea.tarea}</TableCell>
                 <TableCell>
                   <Button
